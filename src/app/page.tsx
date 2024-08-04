@@ -49,7 +49,7 @@ export default function Home() {
     <div className={styles.bio}>
         <div className={titleFont.className}>
             <h1 style={{ letterSpacing: '2px', paddingBottom: '1rem' }}>
-                Hi, I'm <span className={styles.accentColor}>Catie</span>! 
+                Hi, I&#39;m <span className={styles.accentColor}>Catie</span>! 
                 <span className={styles.tagline}>{constants.tagline}</span>
             </h1>
             <h3 className={bodyFont.className} style={{ fontWeight: 'normal', maxWidth: '80vh' }}>{constants.bio}</h3>
