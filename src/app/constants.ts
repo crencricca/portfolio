@@ -1,0 +1,2 @@
+export const tagline = "Software engineer with a UX obsession.";
+export const bio = "Currently based in NYC as a UI platform engineer at Ridgeline since August 2022. Passionate about crafting intuitive, innovative web solutions for real-world problems.";
