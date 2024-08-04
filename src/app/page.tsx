@@ -38,8 +38,8 @@ export default function Home() {
             <h3 className={titleFont.className}><a>Catie Rencricca</a></h3>
         </div>
         <div className={`${styles.navigation} ${bodyFont.variable}`}>
-            <a title="LinkedIn">LinkedIn</a>
-            <a title="Resume">Resume</a>
+            <a href="https://www.linkedin.com/in/catierencricca/" title="LinkedIn">LinkedIn</a>
+            <a href="https://drive.google.com/file/d/1wLjwqueyCvpkhlvYwRD-UM26ngoiqsyk/view?usp=sharing" title="Resume">Resume</a>
             {/* <a title="Contact">Contact</a> */}
         </div>
     </header>
