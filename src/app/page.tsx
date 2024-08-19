@@ -40,7 +40,7 @@ export default function Home() {
         <div className={`${styles.navigation} ${bodyFont.variable}`}>
             <a href="https://www.linkedin.com/in/catierencricca/" title="LinkedIn">LinkedIn</a>
             <a href="https://drive.google.com/file/d/1wLjwqueyCvpkhlvYwRD-UM26ngoiqsyk/view?usp=sharing" title="Resume">Resume</a>
-            {/* <a title="Contact">Contact</a> */}
+            <a href="https://github.com/crencricca" title="Github">Github</a>
         </div>
     </header>
   );
