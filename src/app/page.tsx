@@ -92,7 +92,7 @@ export default function Home() {
         {/* <div className={`${styles.cursor} cursor`} ref={cursorRef}>hi</div> */}
         <footer className={styles.footer}>
             <p className={bodyFont.className}>
-                <input className={styles.checkbox} checked={!isAnimating} title="Animations" type="checkbox" onClick={() => setIsAnimating(!isAnimating)} />
+                <input className={styles.checkbox} checked={!isAnimating} title="Animations" type="checkbox" onChange={() => setIsAnimating(!isAnimating)} />
                 Disable Animations
             </p>
             <span className={styles.grass} />
