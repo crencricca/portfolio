@@ -256,15 +256,22 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .content {
-	padding: 4rem;
+  .bio {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: column;
   }
 
-  .grid {
-	grid-template-columns: 1fr;
-	margin-bottom: 120px;
-	max-width: 320px;
-	text-align: center;
+  .smile {
+    display: none;
+  }
+
+  .navigation {
+    gap: 4px;
+  }
+
+  .content {
+	padding: 4rem;
   }
 
   .card {
@@ -331,16 +338,6 @@
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
 	grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-	filter: invert(1);
-  }
-
-  .logo {
-	filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
 }
 
