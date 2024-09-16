@@ -6,14 +6,14 @@ import { Concert_One, Dosis } from "next/font/google";
 import React from "react";
 import * as constants from './constants';
 
-const titleFont = Concert_One({
+export const titleFont = Concert_One({
     subsets: ['latin'],
     variable: '--font-title',
     display: 'swap',
     weight: '400',
 });
 
-const bodyFont = Dosis({
+export const bodyFont = Dosis({
     subsets: ['latin'],
     variable: '--font-body',
     display: 'swap',
