@@ -16,7 +16,7 @@ export default function Chores() {
     const [newItem, setNewItem] = React.useState('');
     const [todoList, setTodoList] = React.useState(chores);
 
-    const handleAddItem = (e) => {
+    const handleAddItem = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             const copy = [...todoList];
             copy.push({
