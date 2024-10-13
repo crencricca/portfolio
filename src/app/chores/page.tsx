@@ -2,7 +2,6 @@
 
 import React from "react";
 import todoStyles from "./todo.module.css";
-import styles from '../page.module.css';
 import { Dosis } from "next/font/google";
 import { chores, Item } from "../constants";
 
@@ -24,7 +23,7 @@ export default function Chores() {
                 text: newItem,
                 last_completed: undefined
             });
-            setTodoList(copy);
+            setTodoList(copy.sort(a => a.checked ? 1 : -1));
             setNewItem('');
         }
     }
@@ -47,7 +46,7 @@ export default function Chores() {
     const handleRemoved = (item: Item) => {
         const copy = [...todoList];
         const checkedItem = copy.findIndex(todo => todo.text === item.text);
-        if (checkedItem) {
+        if (checkedItem !== -1) {
             copy.splice(checkedItem, 1);
         }
         setTodoList(copy);
@@ -57,7 +56,7 @@ export default function Chores() {
         <li key={item.text} className={todoStyles.listItem}>
             <div>
                 <input className={todoStyles.checkbox} type="checkbox" checked={item.checked} onChange={() => handleChecked(item)} />
-                {item.text}
+                <span className={item.checked ? todoStyles.completed : ''}>{item.text}</span>
                 {item.last_completed 
                     ? <span className={todoStyles.date}>
                         <b>Last completed:</b> 
@@ -76,7 +75,7 @@ export default function Chores() {
             <ul className={`${todoStyles.list} ${bodyFont.className}`}>
                 {todoList.map(item => renderListItem(item))}
             </ul>
-            <input className={todoStyles.addItem} placeholder="Add item..." onChange={e => setNewItem(e.target.value)} onKeyDown={handleAddItem} />
+            <input className={todoStyles.addItem} placeholder="Add item..." value={newItem} onChange={e => setNewItem(e.target.value)} onKeyDown={handleAddItem} />
         </main>
     )
 }

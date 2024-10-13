@@ -25,6 +25,11 @@
     border-bottom: 1px solid lightgray;
 }
 
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
 .checkbox {
     margin-right: 1rem;
 }
