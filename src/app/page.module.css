@@ -11,7 +11,7 @@
 
 .content {
 	display: flex;
-    padding: 6rem;
+  padding: 6rem;
 	justify-content: space-between;
 	height: 100vh;
 }
@@ -95,16 +95,29 @@
 }
 
 .tagline {
-    font-size: 14px;
-    display: flex;
-    font-weight: 200;
-    padding: 0.25rem 0;
-    text-shadow: 2px 2px 1px var(--color-accent)
+  font-size: 14px;
+  display: flex;
+  font-weight: 200;
+  padding: 0.25rem 0;
+  text-shadow: 1px 1px 2px var(--color-accent);
 }
 
-.cursor {
-	background-color: aqua;
-	position: absolute;
+.button {
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid black;
+  display: flex;
+  text-shadow: 1px 1px 2px var(--color-accent);
+  padding: 0.25rem 0.5rem;
+  margin-top: 1em;
+  letter-spacing: 2px;
+}
+
+.button:hover {
+  font-weight: bold;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  text-shadow: none;
 }
 
 .footer {
@@ -114,7 +127,7 @@
 	height: 3.5rem;
 	width: 100%;
 	bottom: 0;
-	position: absolute;
+	position: fixed;
 }
 
 .footer > P {
@@ -209,14 +222,6 @@
   position: relative;
   padding: 4rem 0;
 }
-
-/* .center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
-} */
 
 .center::after {
   background: var(--primary-glow);

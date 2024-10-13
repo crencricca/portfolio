@@ -52,7 +52,11 @@ export default function Home() {
                     Hi, I&#39;m <span className={styles.accentColor}>Catie</span>!
                     <span className={styles.tagline}>{constants.tagline}</span>
                 </h1>
-                <h3 className={bodyFont.className} style={{ fontWeight: 'normal', maxWidth: '80vh' }}>{constants.bio}</h3>
+                <h3 className={bodyFont.className} style={{ fontWeight: 'normal', maxWidth: '80vh' }}>
+                    Software engineer currently based in NYC at <a href="https://www.ridgelineapps.com">Ridgeline</a> since August 2022. 
+                    A dedicated problem-solver who enjoys building intuitive and responsive web/mobile applications.
+                </h3>
+                {/* <button className={styles.button}>PROJECTS</button> */}
             </div>
             <div className={styles.avatarContainer}>
                 <Image
@@ -91,6 +95,9 @@ export default function Home() {
                     {renderBio()}
                 </div>
             </div>
+            {/* <div className={styles.content}>
+                <div>Coming Soon...</div>
+            </div> */}
             {/* <div className={`${styles.cursor} cursor`} ref={cursorRef}>hi</div> */}
             <footer className={styles.footer}>
                 <p className={bodyFont.className}>
