@@ -10,16 +10,6 @@ export type Item = {
 export const chores: Item[] = [
     {
         checked: false,
-        text: 'Find Gifts',
-        last_completed: undefined
-    },
-    {
-        checked: false,
-        text: 'Foster Dogs',
-        last_completed: undefined
-    },
-    {
-        checked: false,
         text: 'Do Laundry',
         last_completed: undefined,
     },
