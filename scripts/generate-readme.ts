@@ -99,7 +99,7 @@ ${rows.join('\n')}
 Also sprouting:
 ${resume.projects.filter(project => project.tier === 'sprout').map(project => `- [${project.name}](${project.links[0].href}) · ${project.oneLiner}`).join('\n')}
 
-### [Visit my site →](${SITE})
+### [Explore the interactive resume →](${SITE})
 
 [LinkedIn](${resume.links.linkedin})
 
