@@ -1,5 +1,5 @@
-// Single source of truth for resume content. The GitHub profile README
-// (scripts/generate-readme.ts) reads from this file.
+// Single source of truth for resume content. The homepage, /resume, and the
+// GitHub profile README (scripts/generate-readme.ts) all read from this file.
 //
 // Keep it self-contained (no imports) and use only erasable TypeScript (no
 // enums or namespaces) so Node can run the README script against it directly.
@@ -52,7 +52,8 @@ export type Project = {
     slug: string,
     name: string,
     oneLiner: string,
-    // Tools the project was built with
+    // Entries that match a skill name (or end with it, like 'Tailwind CSS' for CSS) stir that
+    // skill's seed when the project is hovered.
     stack: string[],
     links: Link[],
     tier: 'featured' | 'regular' | 'sprout',

@@ -1,0 +1,31 @@
+import Link from "next/link";
+import React from "react";
+import styles from "./SiteHeader.module.css";
+import { bodyFont, titleFont } from "../fonts";
+import { resume } from "@/data/resume";
+
+type Props = {
+    current?: 'home' | 'resume',
+    fixed?: boolean,
+    children?: React.ReactNode,
+}
+
+export default function SiteHeader({ current, fixed = false, children }: Props) {
+    return (
+        <header className={`${styles.header} ${fixed ? styles.fixed : ''}`}>
+            <div className={styles.title}>
+                <svg className={styles.smile} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M620-520q25 0 42.5-17.5T680-580q0-25-17.5-42.5T620-640q-25 0-42.5 17.5T560-580q0 25 17.5 42.5T620-520Zm-280 0q25 0 42.5-17.5T400-580q0-25-17.5-42.5T340-640q-25 0-42.5 17.5T280-580q0 25 17.5 42.5T340-520Zm140 260q68 0 123.5-38.5T684-400h-66q-22 37-58.5 58.5T480-320q-43 0-79.5-21.5T342-400h-66q25 63 80.5 101.5T480-260Zm0 180q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Z" /></svg>
+                <p className={titleFont.className}>
+                    <Link href="/" aria-current={current === 'home' ? 'page' : undefined}>{resume.name}</Link>
+                </p>
+            </div>
+            <nav className={`${styles.navigation} ${bodyFont.variable}`} aria-label="Main">
+                <a href={resume.links.linkedin} title="LinkedIn">LinkedIn</a>
+                <Link href="/resume" title="Resume" aria-current={current === 'resume' ? 'page' : undefined}>Resume</Link>
+                <a href={resume.links.pdf} title="PDF">PDF</a>
+                <a href={resume.links.github} title="Github">Github</a>
+                {children}
+            </nav>
+        </header>
+    );
+}

@@ -1,0 +1,208 @@
+.sectionTitle {
+	composes: sectionTitle from "./resume.module.css";
+}
+
+.sectionNote {
+	composes: sectionNote from "./resume.module.css";
+}
+
+/* Garden (projects) */
+
+.garden {
+	padding: 3rem 2.5rem 0;
+	background: linear-gradient(to bottom, var(--sky-low), #fff);
+}
+
+/* Skills float above the plants as dandelion seeds, at slightly different
+   heights. Hovering a project stirs the seeds it was built with. */
+.seeds {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	gap: 0.5rem 1.5rem;
+	max-width: 860px;
+	margin: 0 auto 1rem;
+}
+
+.seed {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.15rem;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--muted);
+	animation: drift 6s ease-in-out infinite;
+	animation-delay: calc(var(--i) * -1.4s);
+	transition: color 0.2s;
+}
+
+.seed:nth-child(even) {
+	margin-top: 1.5rem;
+}
+
+.seed:nth-child(3n) {
+	margin-top: 0.6rem;
+}
+
+@keyframes drift {
+	0%, 100% { translate: 0 0; }
+	50% { translate: 0 -6px; }
+}
+
+.seedArt {
+	width: 24px;
+	height: 34px;
+	color: #6a6a70;
+	transform-origin: 50% 90%;
+	transition: color 0.2s;
+}
+
+/* Color changes too, so it still reads with animations off */
+.seed[data-stirred] {
+	color: var(--ink);
+}
+
+.seed[data-stirred] .seedArt {
+	color: #a8641c;
+	animation: wiggle 0.7s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+	0%, 100% { rotate: -12deg; }
+	50% { rotate: 12deg; }
+}
+
+/* The bed runs edge to edge so the ground spans the whole page. Plots grow
+   to fill each row, and each carries its own grass, so wrapped rows on small
+   screens get a full strip too. On wide screens the extra width becomes
+   padding (still grassy) so the plants stay grouped. */
+.bed {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	margin: 0 -2.5rem;
+	padding: 0 max(0px, calc((100% - 1200px) / 2));
+	background: url("/grass.png") repeat-x bottom / auto 30px;
+}
+
+.plot {
+	flex: 1 0 auto;
+	display: flex;
+	justify-content: center;
+	padding: 0 0.6rem;
+	background: url("/grass.png") repeat-x bottom / auto 30px;
+}
+
+.plant {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5rem 0.25rem 6px;
+	background: none;
+	border: none;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+}
+
+.sprout {
+	display: block;
+	transform-origin: bottom center;
+}
+
+.art {
+	display: block;
+	transform-origin: bottom center;
+}
+
+.plant:hover .art,
+.plant:focus-visible .art {
+	animation: sway 1.8s ease-in-out infinite;
+}
+
+@keyframes sway {
+	0%, 100% { rotate: -3deg; }
+	50% { rotate: 3deg; }
+}
+
+/* Plants grow in as they scroll into view. Without support they're simply grown. */
+@supports (animation-timeline: view()) {
+	.sprout {
+		animation: grow linear both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 30%;
+	}
+}
+
+@keyframes grow {
+	from {
+		transform: scale(0.4, 0.1);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	to {
+		transform: none;
+		opacity: 1;
+	}
+}
+
+.stake {
+	position: relative;
+	margin-top: -4px;
+	background: #fff;
+	border: 1.5px solid var(--ink);
+	border-radius: 6px 4px 7px 3px;
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+	padding: 0.15rem 0.65rem;
+	font-size: 0.98rem;
+	font-weight: 600;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.plot[data-tier="sprout"] .stake {
+	font-size: 0.88rem;
+}
+
+.plant:hover .stake,
+.plant:focus-visible .stake {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+.growing {
+	display: block;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #3d6b22;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+	.garden {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.seeds {
+		gap: 0.25rem 1rem;
+	}
+
+	.bed {
+		margin: 0 -16px;
+		padding: 0;
+	}
+
+	.plot {
+		padding: 0 0.4rem;
+	}
+}
