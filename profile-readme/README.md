@@ -30,7 +30,7 @@ Also sprouting:
 - [native-weather](https://github.com/crencricca/native-weather) · Today's and yesterday's weather, side by side.
 - [calendar](https://github.com/crencricca/calendar) · Plan events with friends.
 
-### [Visit my site →](https://heycatie.vercel.app)
+### [Explore the interactive resume →](https://heycatie.vercel.app)
 
 [LinkedIn](https://www.linkedin.com/in/catierencricca/)
 

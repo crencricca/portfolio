@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./garden.module.css";
-import { titleFont } from "../fonts";
+import { titleFont } from "../../fonts";
 import type { Project, SkillGroup } from "@/data/resume";
 import { Plant, Seed } from "./art";
 import ProjectDialog from "./ProjectDialog";

@@ -75,7 +75,7 @@ const DARK: Theme = {
     stars: true,
 };
 
-// Same outline as the clouds on the site (src/app/resume/art.tsx), 220x140
+// Same outline as the clouds on the site (src/app/components/resume/art.tsx), 220x140
 const CLOUD_PATH = 'M40 118 C22 120 10 108 14 94 C4 88 4 70 18 64 C12 46 28 32 46 38 C50 20 72 10 92 20 C104 4 136 4 148 22 C164 12 188 22 186 42 C204 44 214 62 204 76 C216 88 208 112 186 112 C180 124 160 128 148 118 C136 130 112 130 102 120 C90 130 64 130 58 120 C52 124 44 122 40 118 Z';
 
 type Scene = {
@@ -278,7 +278,7 @@ ${rows.join('\n')}
 Also sprouting:
 ${sprouts.map(project => `- [${project.name}](${project.links[0]?.href}) · ${project.oneLiner}`).join('\n')}
 
-### [Visit my site →](${SITE_URL})
+### [Explore the interactive resume →](${SITE_URL})
 
 [LinkedIn](${resume.links.linkedin})
 
