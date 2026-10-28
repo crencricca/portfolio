@@ -51,8 +51,7 @@
 html,
 body {
   max-width: 100vw;
-  /* clip, not hidden: hidden turns body into a scroll container, which breaks
-     scroll-driven animations */
+  /* not hidden: that makes body a scroll container and breaks scroll-driven animations */
   overflow-x: clip;
 }
 
@@ -69,48 +68,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-:focus-visible {
-  outline: 2px dashed #000;
-  outline-offset: 4px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Every animation's resting state is its final frame, so switching motion off
-   just stops things moving. Set by the "Disable Animations" toggle or the OS. */
-html[data-animations="off"],
-html[data-animations="off"] *,
-html[data-animations="off"] *::before,
-html[data-animations="off"] *::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
-@media print {
-  body {
-    background: #fff;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
 }
