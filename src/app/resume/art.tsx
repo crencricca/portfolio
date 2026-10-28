@@ -6,7 +6,6 @@ import type { Project } from "@/data/resume";
 const INK = '#2a2a2a';
 const STEM = '#4b8530';
 const LEAF = '#6ba84a';
-const CLOUD = '#d9a0a0';
 
 const BLOOMS = [
     { petal: '#f2c14e', center: '#a8641c' },
@@ -31,12 +30,14 @@ export const SketchDefs = () => (
     </svg>
 );
 
-export const CloudShape = ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 220 140" aria-hidden="true">
+// White outline on the blue sky; fillOpacity sets how solid the cloud's body is
+export const CloudShape = ({ className, style, fillOpacity = 0.9 }: { className?: string, style?: React.CSSProperties, fillOpacity?: number }) => (
+    <svg className={className} style={style} viewBox="0 0 220 140" aria-hidden="true">
         <path
             d="M40 118 C22 120 10 108 14 94 C4 88 4 70 18 64 C12 46 28 32 46 38 C50 20 72 10 92 20 C104 4 136 4 148 22 C164 12 188 22 186 42 C204 44 214 62 204 76 C216 88 208 112 186 112 C180 124 160 128 148 118 C136 130 112 130 102 120 C90 130 64 130 58 120 C52 124 44 122 40 118 Z"
             fill="#fff"
-            stroke={CLOUD}
+            fillOpacity={fillOpacity}
+            stroke="#fff"
             strokeWidth="5"
             strokeLinejoin="round"
             filter="url(#sketch)"

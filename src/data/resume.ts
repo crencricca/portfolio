@@ -52,7 +52,8 @@ export type Project = {
     slug: string,
     name: string,
     oneLiner: string,
-    // Entries that match a skill name make that project's plant glow when the skill is hovered.
+    // Entries that match a skill name (or end with it, like 'Tailwind CSS' for CSS) stir that
+    // skill's seed when the project is hovered.
     stack: string[],
     links: Link[],
     tier: 'featured' | 'regular' | 'sprout',
@@ -151,9 +152,9 @@ export const resume: Resume = {
         },
     ],
     skills: [
-        { name: 'Frontend', skills: ['TypeScript', 'React', 'Next.js', 'Vue.js', 'CSS'] },
+        { name: 'Frontend', skills: ['TypeScript', 'React', 'Next.js', 'CSS'] },
         { name: 'Mobile', skills: ['React Native'] },
-        { name: 'Game dev', skills: ['Godot', 'GDScript'] },
+        { name: 'Game dev', skills: ['Godot'] },
     ],
     projects: [
         {
@@ -170,7 +171,7 @@ export const resume: Resume = {
             slug: 'localhost',
             name: 'localhost',
             oneLiner: 'A social coordination app, built for the web with Next.js and for mobile with React Native.',
-            stack: ['TypeScript', 'React', 'Next.js', 'React Native', 'Firebase'],
+            stack: ['TypeScript', 'React', 'Next.js', 'React Native', 'Firebase', 'Tailwind CSS'],
             links: [
                 { label: 'Live site', href: 'https://localhosting.vercel.app' },
                 { label: 'Web repo', href: 'https://github.com/crencricca/localhost' },
@@ -207,7 +208,7 @@ export const resume: Resume = {
             slug: 'aol-chat',
             name: 'aol-chat',
             oneLiner: 'A nostalgic chat interface for anyone else who misses AIM.',
-            stack: ['React'],
+            stack: ['React', 'Tailwind CSS'],
             links: [{ label: 'GitHub', href: 'https://github.com/crencricca/aol-chat' }],
             tier: 'sprout',
         },
@@ -223,7 +224,7 @@ export const resume: Resume = {
             slug: 'calendar',
             name: 'calendar',
             oneLiner: 'Plan events with friends.',
-            stack: ['React', 'TypeScript'],
+            stack: ['React', 'TypeScript', 'Tailwind CSS'],
             links: [{ label: 'GitHub', href: 'https://github.com/crencricca/calendar' }],
             tier: 'sprout',
         },

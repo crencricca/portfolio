@@ -12,104 +12,65 @@ type Props = {
     projects: Project[],
 }
 
-// Skills drift down as seeds; hovering, focusing, or tapping one makes the
-// projects built with it glow in the garden below.
+// 'Tailwind CSS' counts as CSS, but 'React Native' doesn't count as React
+const usesSkill = (project: Project, skill: string) =>
+    project.stack.some(tool => tool === skill || tool.endsWith(` ${skill}`));
+
+// Skills float above the garden as dandelion seeds. Hovering or focusing a
+// project stirs the seeds it was built with.
 export default function SkillGarden({ skills, projects }: Props) {
-    const [hovered, setHovered] = React.useState<string | null>(null);
-    const [pinned, setPinned] = React.useState<string | null>(null);
+    const [activeSlug, setActiveSlug] = React.useState<string | null>(null);
     const [openSlug, setOpenSlug] = React.useState<string | null>(null);
-    const active = hovered ?? pinned;
+    const activeProject = projects.find(project => project.slug === activeSlug);
 
-    const grewInto = React.useMemo(() => {
-        const map: Record<string, string[]> = {};
-        projects.forEach(project => project.stack.forEach(skill => {
-            (map[skill] ??= []).push(project.name);
-        }));
-        return map;
-    }, [projects]);
+    const renderSeed = (skill: string, index: number) => (
+        <li
+            key={skill}
+            className={styles.seed}
+            data-stirred={(activeProject && usesSkill(activeProject, skill)) || undefined}
+            style={{ '--i': index } as React.CSSProperties}
+        >
+            <Seed className={styles.seedArt} />
+            {skill}
+        </li>
+    );
 
-    const renderSeed = (skill: string, index: number) => {
-        const grown = grewInto[skill] ?? [];
-        const content = (
-            <>
-                <Seed className={styles.seedArt} />
-                <span className={styles.seedLabel}>{skill}</span>
-            </>
-        );
-
-        return (
-            <li key={skill} style={{ '--i': index } as React.CSSProperties}>
-                {grown.length ? (
-                    <button
-                        type="button"
-                        className={`${styles.seed} ${styles.seedButton}`}
-                        aria-pressed={pinned === skill}
-                        onMouseEnter={() => setHovered(skill)}
-                        onMouseLeave={() => setHovered(null)}
-                        onFocus={() => setHovered(skill)}
-                        onBlur={() => setHovered(null)}
-                        onClick={() => setPinned(pinned === skill ? null : skill)}
-                    >
-                        {content}
-                        <span className="visually-hidden">, grew into {grown.join(', ')}</span>
-                    </button>
-                ) : (
-                    <span className={styles.seed}>{content}</span>
-                )}
-            </li>
-        );
-    }
-
-    const renderPlant = (project: Project, index: number) => {
-        const glowing = active ? project.stack.includes(active) : false;
-        return (
-            <li key={project.slug} className={styles.plot} data-tier={project.tier} data-glow={glowing || undefined}>
-                <button
-                    type="button"
-                    className={styles.plant}
-                    aria-haspopup="dialog"
-                    onClick={() => setOpenSlug(project.slug)}
-                >
-                    <span className={styles.sprout}>
-                        <Plant className={styles.art} tier={project.tier} variant={index} />
-                    </span>
-                    <span className={styles.stake}>
-                        {project.name}
-                        {project.growing && (
-                            <span className={styles.growing}><span className="visually-hidden">, </span>growing</span>
-                        )}
-                    </span>
-                </button>
-            </li>
-        );
-    }
+    const renderPlant = (project: Project, index: number) => (
+        <li key={project.slug} className={styles.plot} data-tier={project.tier}>
+            <button
+                type="button"
+                className={styles.plant}
+                aria-haspopup="dialog"
+                onMouseEnter={() => setActiveSlug(project.slug)}
+                onMouseLeave={() => setActiveSlug(null)}
+                onFocus={() => setActiveSlug(project.slug)}
+                onBlur={() => setActiveSlug(null)}
+                onClick={() => setOpenSlug(project.slug)}
+            >
+                <span className={styles.sprout}>
+                    <Plant className={styles.art} tier={project.tier} variant={index} />
+                </span>
+                <span className={styles.stake}>
+                    {project.name}
+                    {project.growing && (
+                        <span className={styles.growing}><span className="visually-hidden">, </span>growing</span>
+                    )}
+                </span>
+            </button>
+        </li>
+    );
 
     return (
         <>
-            <section id="skills" className={styles.seeds} aria-labelledby="skills-title">
-                <h2 id="skills-title" className={`${titleFont.className} ${styles.sectionTitle}`}>
-                    Skills
-                    <span className={styles.sectionNote}>~ seeds on the breeze ~</span>
-                </h2>
-                <p className={styles.hint}>Hover or tap a seed to see what grew from it.</p>
-                <div className={styles.seedGroups}>
-                    {skills.map(group => (
-                        <div key={group.name} className={styles.seedGroup}>
-                            <h3>{group.name}</h3>
-                            <ul className={styles.seedList}>
-                                {group.skills.map(renderSeed)}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
             <section id="projects" className={styles.garden} aria-labelledby="projects-title">
                 <h2 id="projects-title" className={`${titleFont.className} ${styles.sectionTitle}`}>
                     Projects
-                    <span className={styles.sectionNote}>~ the garden ~</span>
+                    <span className={styles.sectionNote}>~ skills on the breeze, projects in the garden ~</span>
                 </h2>
-                <ul className={styles.bed} data-active={active ? '' : undefined}>
+                <ul className={styles.seeds} aria-label="Skills">
+                    {skills.flatMap(group => group.skills).map(renderSeed)}
+                </ul>
+                <ul className={styles.bed}>
                     {projects.map(renderPlant)}
                 </ul>
             </section>

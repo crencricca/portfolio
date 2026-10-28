@@ -145,10 +145,13 @@
 
 .links a {
 	text-decoration: underline;
-	text-decoration-style: wavy;
 	text-decoration-color: var(--color-accent);
-	text-decoration-thickness: 2px;
-	text-underline-offset: 5px;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+}
+
+.links a:hover {
+	text-decoration-color: currentColor;
 }
 
 /* Windows 95 window, for Wish You Were Here */

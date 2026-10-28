@@ -90,6 +90,7 @@ a {
 
 /* Every animation's resting state is its final frame, so switching motion off
    just stops things moving. Set by the "Disable Animations" toggle or the OS. */
+html[data-animations="off"],
 html[data-animations="off"] *,
 html[data-animations="off"] *::before,
 html[data-animations="off"] *::after {

@@ -19,7 +19,8 @@ export default function ViewToggle({ className }: { className?: string }) {
             delete document.documentElement.dataset.view;
         }
         savePreference(VIEW_KEY, next ? 'plain' : 'garden');
-        window.scrollTo({ top: 0 });
+        // The page content swaps, so jump rather than glide back to the top
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
     return (

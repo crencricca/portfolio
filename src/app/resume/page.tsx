@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import React from "react";
 import styles from "./resume.module.css";
 import { bodyFont, titleFont } from "../fonts";
 import { currentRole, resume } from "@/data/resume";
@@ -25,27 +26,51 @@ export const metadata: Metadata = {
     },
 };
 
+// Decorative clouds drift in their own strips above and below the intro, so
+// they never pass behind text or the avatar. x is where each rests when
+// animations are off.
+type SkyCloud = { x: string, y: number, width: number, duration: number, delay: number };
+
+const SKY_CLOUDS: Record<'above' | 'below', SkyCloud[]> = {
+    above: [
+        { x: '8vw', y: 6, width: 125, duration: 140, delay: -40 },
+        { x: '62vw', y: 22, width: 85, duration: 95, delay: -70 },
+    ],
+    below: [
+        { x: '38vw', y: 4, width: 100, duration: 120, delay: -15 },
+        { x: '84vw', y: 20, width: 70, duration: 105, delay: -55 },
+    ],
+};
+
 export default function ResumePage() {
     const current = currentRole();
-    const [firstName, ...restOfName] = resume.name.split(' ');
     const education = resume.education[0];
+
+    const renderCloudLane = (lane: keyof typeof SKY_CLOUDS) => (
+        <div className={styles.cloudLane} aria-hidden="true">
+            {SKY_CLOUDS[lane].map(cloud => (
+                <CloudShape
+                    key={cloud.x}
+                    className={styles.drift}
+                    fillOpacity={0.35}
+                    style={{ '--x': cloud.x, top: cloud.y, width: cloud.width, animationDuration: `${cloud.duration}s`, animationDelay: `${cloud.delay}s` } as React.CSSProperties}
+                />
+            ))}
+        </div>
+    );
 
     const renderSky = () => (
         <section className={styles.sky} aria-labelledby="resume-name">
-            <div className={styles.skyClouds} aria-hidden="true">
-                <Image className={styles.drift} src="/cloud.png" alt="" width={125} height={75} />
-                <Image className={styles.drift} src="/cloud.png" alt="" width={85} height={50} />
-                <Image className={styles.drift} src="/cloud.png" alt="" width={100} height={60} />
-            </div>
+            {renderCloudLane('above')}
             <div className={styles.hero}>
                 <div>
                     <h1 id="resume-name" className={`${titleFont.className} ${styles.name}`}>
-                        <span className={styles.firstName}>{firstName}</span> {restOfName.join(' ')}
+                        {resume.name}
                     </h1>
                     <p className={`${titleFont.className} ${styles.tagline}`}>{resume.tagline}</p>
                     {current && (
                         <p className={styles.current}>
-                            Currently <strong>{current.title}</strong> at <a href={current.url}>{current.company}</a> · {resume.location}
+                            <strong>{current.title}</strong> at <a href={current.url}>{current.company}</a> · {resume.location}
                         </p>
                     )}
                     <p className={styles.bio}>{resume.bio}</p>
@@ -57,6 +82,7 @@ export default function ResumePage() {
                 </div>
                 <Image className={styles.avatar} src="/avatar.png" alt="Sketch of Catie" width={220} height={220} priority />
             </div>
+            {renderCloudLane('below')}
             <a className={styles.scrollCue} href="#experience">
                 drift down <span aria-hidden="true">↓</span>
             </a>
@@ -78,9 +104,11 @@ export default function ResumePage() {
                                 <h3 className={titleFont.className}>
                                     {role.url ? <a href={role.url}>{role.company}</a> : role.company}
                                 </h3>
-                                <p>{role.title}</p>
-                                <p className={styles.meta}>{formatRange(role.start, role.end)}</p>
-                                {role.location && <p className={styles.meta}>{role.location}</p>}
+                                <p className={styles.role}>{role.title}</p>
+                                <p className={styles.meta}>
+                                    {formatRange(role.start, role.end)}
+                                    {role.location && <span>{role.location}</span>}
+                                </p>
                             </div>
                         </article>
                         {role.highlights?.length ? (

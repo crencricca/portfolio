@@ -6,119 +6,91 @@
 	composes: sectionNote from "./resume.module.css";
 }
 
-/* Seeds (skills) */
-
-.seeds {
-	padding: 2rem 2.5rem 1rem;
-}
-
-.hint {
-	text-align: center;
-	color: var(--muted);
-	margin: -1.75rem 0 2.25rem;
-}
-
-.seedGroups {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 2rem 4.5rem;
-	max-width: 1000px;
-	margin: 0 auto;
-}
-
-.seedGroup h3 {
-	font-size: 0.85rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.12em;
-	color: var(--muted);
-	text-align: center;
-	margin-bottom: 0.75rem;
-}
-
-.seedList {
-	list-style: none;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 0.25rem 0.75rem;
-}
-
-.seedList > li {
-	animation: drift 7s ease-in-out infinite;
-	animation-delay: calc(var(--i) * -1.7s);
-}
-
-.seedList > li:nth-child(even) {
-	margin-top: 1.5rem;
-}
-
-@keyframes drift {
-	0%, 100% { translate: 0 0; rotate: -2deg; }
-	50% { translate: 5px -9px; rotate: 3deg; }
-}
-
-.seed {
-	display: inline-flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 0.1rem;
-	padding: 0.3rem 0.6rem;
-	border-radius: 14px;
-	font: inherit;
-	font-size: 1.05rem;
-	font-weight: 600;
-	color: var(--ink);
-}
-
-.seedButton {
-	background: none;
-	border: none;
-	cursor: pointer;
-	transition: background-color 0.2s;
-}
-
-.seedButton .seedLabel {
-	text-decoration: underline dotted;
-	text-decoration-color: var(--muted);
-	text-underline-offset: 4px;
-}
-
-.seedButton:hover,
-.seedButton[aria-pressed="true"] {
-	background: #fff4cf;
-}
-
-.seedButton[aria-pressed="true"] .seedArt {
-	color: #a8641c;
-}
-
-.seedArt {
-	width: 28px;
-	height: 39px;
-	color: #5a5a60;
-}
-
 /* Garden (projects) */
 
 .garden {
 	padding: 3rem 2.5rem 0;
+	background: linear-gradient(to bottom, var(--sky-low), #fff);
 }
 
-/* Each plot carries its own grass, so wrapped rows on small screens each get
-   a strip of ground */
+/* Skills float above the plants as dandelion seeds, at slightly different
+   heights. Hovering a project stirs the seeds it was built with. */
+.seeds {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	gap: 0.5rem 1.5rem;
+	max-width: 860px;
+	margin: 0 auto 1rem;
+}
+
+.seed {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.15rem;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--muted);
+	animation: drift 6s ease-in-out infinite;
+	animation-delay: calc(var(--i) * -1.4s);
+	transition: color 0.2s;
+}
+
+.seed:nth-child(even) {
+	margin-top: 1.5rem;
+}
+
+.seed:nth-child(3n) {
+	margin-top: 0.6rem;
+}
+
+@keyframes drift {
+	0%, 100% { translate: 0 0; }
+	50% { translate: 0 -6px; }
+}
+
+.seedArt {
+	width: 24px;
+	height: 34px;
+	color: #6a6a70;
+	transform-origin: 50% 90%;
+	transition: color 0.2s;
+}
+
+/* Color changes too, so it still reads with animations off */
+.seed[data-stirred] {
+	color: var(--ink);
+}
+
+.seed[data-stirred] .seedArt {
+	color: #a8641c;
+	animation: wiggle 0.7s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+	0%, 100% { rotate: -12deg; }
+	50% { rotate: 12deg; }
+}
+
+/* The bed runs edge to edge so the ground spans the whole page. Plots grow
+   to fill each row, and each carries its own grass, so wrapped rows on small
+   screens get a full strip too. On wide screens the extra width becomes
+   padding (still grassy) so the plants stay grouped. */
 .bed {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 	align-items: flex-end;
-	max-width: 1200px;
-	margin: 0 auto;
+	margin: 0 -2.5rem;
+	padding: 0 max(0px, calc((100% - 1200px) / 2));
+	background: url("/grass.png") repeat-x bottom / auto 30px;
 }
 
 .plot {
+	flex: 1 0 auto;
 	display: flex;
 	justify-content: center;
 	padding: 0 0.6rem;
@@ -145,21 +117,11 @@
 .art {
 	display: block;
 	transform-origin: bottom center;
-	transition: opacity 0.3s, filter 0.3s;
 }
 
 .plant:hover .art,
 .plant:focus-visible .art {
 	animation: sway 1.8s ease-in-out infinite;
-}
-
-.bed[data-active] .plot:not([data-glow]) .art {
-	opacity: 0.35;
-}
-
-.plot[data-glow] .art {
-	filter: drop-shadow(0 0 10px rgba(242, 193, 78, 0.95));
-	animation: sway 2.4s ease-in-out infinite;
 }
 
 @keyframes sway {
@@ -210,8 +172,9 @@
 
 .plant:hover .stake,
 .plant:focus-visible .stake {
-	text-decoration: underline wavy var(--color-accent);
-	text-underline-offset: 4px;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
 }
 
 .growing {
@@ -225,14 +188,18 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-	.seeds,
 	.garden {
 		padding-left: 16px;
 		padding-right: 16px;
 	}
 
-	.seedGroups {
-		gap: 1.5rem;
+	.seeds {
+		gap: 0.25rem 1rem;
+	}
+
+	.bed {
+		margin: 0 -16px;
+		padding: 0;
 	}
 
 	.plot {
