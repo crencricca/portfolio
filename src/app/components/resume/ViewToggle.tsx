@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { VIEW_KEY, savePreference } from "../preferences";
+import { VIEW_KEY, savePreference } from "../../preferences";
 
 export default function ViewToggle({ className }: { className?: string }) {
     const [plain, setPlain] = React.useState(false);
@@ -25,7 +25,7 @@ export default function ViewToggle({ className }: { className?: string }) {
 
     return (
         <button type="button" className={className} aria-pressed={plain} onClick={handleClick}>
-            Plain view
+            Plain resume
         </button>
     );
 }

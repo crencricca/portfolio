@@ -1,5 +1,5 @@
 import styles from "./plain.module.css";
-import { titleFont } from "../fonts";
+import { titleFont } from "../../fonts";
 import { resume } from "@/data/resume";
 import { formatRange } from "@/data/format";
 

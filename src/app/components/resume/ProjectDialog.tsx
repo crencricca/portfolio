@@ -54,7 +54,7 @@ export default function ProjectDialog({ project, onClose }: Props) {
             );
         }
 
-        const src = `/resume/projects/${project.media.file}`;
+        const src = `/projects/${project.media.file}`;
         if (/\.(mp4|webm)$/.test(project.media.file)) {
             const still = prefersStillMedia();
             return (

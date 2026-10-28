@@ -1,5 +1,5 @@
-// Single source of truth for resume content. The homepage, /resume, and the
-// GitHub profile README (scripts/generate-readme.ts) all read from this file.
+// Single source of truth for resume content. The landing page and the GitHub
+// profile README (scripts/generate-readme.ts) both read from this file.
 //
 // Keep it self-contained (no imports) and use only erasable TypeScript (no
 // enums or namespaces) so Node can run the README script against it directly.
@@ -43,7 +43,7 @@ export type SkillGroup = {
 }
 
 export type ProjectMedia = {
-    // File in public/resume/projects/. .mp4/.webm render as a looping video.
+    // File in public/projects/. .mp4/.webm render as a looping video.
     file: string,
     alt: string,
 }
