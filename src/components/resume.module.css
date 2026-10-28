@@ -1,0 +1,758 @@
+.page {
+	--sky-top: #c3dcee;
+	--sky-mid: #d3e6f4;
+	--sky-low: #e8f2f9;
+	--root: #8b6a4f;
+	--ink: #1d1d1f;
+	--muted: #4f4f55;
+	--gutter: 2.5rem;
+	--header: 7rem;
+	min-height: 100vh;
+	color: var(--ink);
+	font-family: var(--font-body);
+	background: var(--sky-top);
+}
+
+.page h1,
+.page h2,
+.scene h3,
+.home,
+.tagline {
+	font-family: var(--font-title);
+}
+
+.scene h2,
+.scene h3 {
+	font-weight: normal;
+}
+
+.hero a,
+.card a,
+.plain a {
+	text-decoration: underline 1px var(--color-accent);
+	text-underline-offset: 4px;
+}
+
+.hero a:hover,
+.card a:hover {
+	text-decoration-color: currentColor;
+}
+
+.card a,
+.plain a {
+	margin-right: 1.5rem;
+}
+
+/* Floats over the sky so the intro fills exactly one screen */
+.header {
+	position: absolute;
+	inset: 0 0 auto;
+	z-index: 1;
+	justify-content: space-between;
+	padding: 2.5rem var(--gutter);
+}
+
+.header,
+.header nav,
+.home {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 2rem;
+}
+
+.home {
+	gap: 1rem;
+	font-size: 1.17em;
+	font-weight: bold;
+}
+
+.header a:hover {
+	text-decoration: underline wavy var(--color-accent) 2px;
+	text-underline-offset: 5px;
+}
+
+.header button {
+	padding: 0.15rem 0.8rem;
+	font: inherit;
+	font-weight: 600;
+	color: inherit;
+	background: none;
+	border: 2px solid;
+	border-radius: 999px;
+	cursor: pointer;
+}
+
+.header [aria-pressed="true"] {
+	color: #fff;
+	background: var(--ink);
+	border-color: var(--ink);
+}
+
+.scene h2 {
+	margin-bottom: 2.5rem;
+	font-size: clamp(1.7rem, 4vw, 2.2rem);
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+.scene h2 span {
+	display: block;
+	font: 1rem var(--font-body);
+	letter-spacing: 0;
+	color: var(--muted);
+}
+
+/* One screen tall, with "drift down" at the bottom edge */
+.sky {
+	display: flex;
+	flex-direction: column;
+	min-height: 100svh;
+	padding: var(--header) var(--gutter) 1.5rem;
+	background: linear-gradient(var(--sky-top), var(--sky-mid));
+}
+
+/* Strips the clouds drift through, clear of the text */
+.lane {
+	position: relative;
+	height: 96px;
+	margin: 0 calc(-1 * var(--gutter));
+	overflow: hidden;
+}
+
+.lane svg {
+	position: absolute;
+	left: var(--x);
+	animation: float linear infinite;
+}
+
+.hero {
+	flex: 1;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-content: center;
+	align-items: center;
+	gap: 1.5rem 3rem;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	font-size: 1.15rem;
+}
+
+.hero h1 {
+	font-size: clamp(2.5rem, 7vw, 3.75rem);
+	letter-spacing: 2px;
+	line-height: 1.15;
+}
+
+.hero img {
+	width: 220px;
+	height: auto;
+}
+
+.tagline {
+	margin: 1rem 0 1.5rem;
+	font-size: 1.05rem;
+	text-shadow: 1px 1px 2px var(--color-accent);
+}
+
+.current {
+	font-size: 1.25rem;
+}
+
+.bio {
+	max-width: 36rem;
+	color: var(--muted);
+}
+
+.links {
+	display: flex;
+	gap: 1.75rem;
+	margin-top: 1.5rem;
+	font-weight: 600;
+}
+
+.cue {
+	align-self: center;
+	font-weight: 600;
+	color: var(--muted);
+	transition: color 0.2s;
+}
+
+.cue:hover,
+.cue:focus-visible {
+	color: #fff;
+}
+
+.cue span {
+	display: inline-block;
+	animation: nudge 2.4s ease-in-out infinite;
+}
+
+/* Experience; earlier roles are smaller and set back */
+.clouds {
+	padding: 3rem var(--gutter) 4.5rem;
+	background: linear-gradient(var(--sky-mid), var(--sky-low));
+}
+
+.clouds ol {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 1rem 2.5rem;
+	list-style: none;
+}
+
+.clouds li {
+	width: 300px;
+	margin-top: 1.5rem;
+	animation: bob 9s ease-in-out calc(var(--i) * -3s) infinite;
+}
+
+.clouds li:first-child {
+	width: 370px;
+	margin-top: 0;
+	font-size: 1.2em;
+}
+
+.clouds li:nth-child(2) {
+	margin-top: 4rem;
+}
+
+.clouds article {
+	position: relative;
+	display: grid;
+	place-items: center;
+	aspect-ratio: 220 / 140;
+	transition: transform 0.3s;
+}
+
+.clouds li:hover article {
+	transform: translateY(-8px);
+}
+
+.clouds svg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	filter: drop-shadow(0 8px 12px rgb(60 100 140 / 0.18));
+}
+
+/* Text sits below the puffs along the cloud's top edge */
+.clouds article div {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 13% 12% 5%;
+	line-height: 1.3;
+	text-align: center;
+}
+
+.clouds h3 {
+	font-size: 1.5em;
+	line-height: 1.15;
+}
+
+.clouds h3 a:hover {
+	text-decoration: underline;
+}
+
+.clouds strong {
+	font-size: 1.1em;
+}
+
+.clouds small {
+	display: flex;
+	flex-direction: column;
+	font-size: 0.95em;
+	color: var(--muted);
+}
+
+.garden {
+	padding: 3rem var(--gutter) 0;
+	background: linear-gradient(var(--sky-low), #fff);
+}
+
+/* Skills; data-stirred ones wiggle while a project using them is hovered */
+.seeds {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	gap: 0.25rem 1.5rem;
+	max-width: 860px;
+	margin: 0 auto 1rem;
+	list-style: none;
+}
+
+.seeds li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: 600;
+	color: var(--muted);
+	animation: bob 6s ease-in-out calc(var(--i) * -1.4s) infinite;
+}
+
+.seeds li:nth-child(even) {
+	margin-top: 1.5rem;
+}
+
+.seeds svg {
+	width: 24px;
+	color: #6a6a70;
+	transform-origin: 50% 90%;
+}
+
+.seeds [data-stirred] {
+	color: var(--ink);
+}
+
+.seeds [data-stirred] svg {
+	color: #a8641c;
+	animation: wiggle 0.7s ease-in-out infinite;
+}
+
+/* Full-bleed ground; each plot has grass too, so wrapped rows get a strip */
+.bed {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	margin: 0 calc(-1 * var(--gutter));
+	padding: 0 max(0px, (100% - 1200px) / 2);
+	list-style: none;
+}
+
+.bed,
+.bed li {
+	background: url(/grass.png) repeat-x bottom / auto 30px;
+}
+
+.bed li {
+	flex: 1 0 auto;
+	display: flex;
+	justify-content: center;
+	padding: 0 0.5rem;
+}
+
+.bed button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5rem 0 6px;
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+.sprout,
+.sprout svg {
+	display: block;
+	transform-origin: bottom;
+}
+
+.bed button:hover svg {
+	animation: sway 1.8s ease-in-out infinite;
+}
+
+.stake {
+	margin-top: -4px;
+	padding: 0.15rem 0.65rem;
+	font-weight: 600;
+	white-space: nowrap;
+	background: #fff;
+	border: 1.5px solid;
+	border-radius: 6px 4px 7px 3px;
+	box-shadow: 2px 2px 0 rgb(0 0 0 / 0.12);
+}
+
+.bed button:hover .stake {
+	text-decoration: underline;
+}
+
+.stake small {
+	display: block;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #3d6b22;
+}
+
+.card {
+	width: min(620px, 100vw - 32px);
+	max-width: none;
+	margin: auto;
+	padding: 0;
+	color: var(--ink);
+	border: 2px solid;
+	border-radius: 18px 12px 20px 14px;
+	box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+.card::backdrop {
+	background: rgb(29 29 31 / 0.45);
+}
+
+.card > div {
+	display: grid;
+	gap: 1rem;
+	padding: 1.25rem 1.5rem 1.5rem;
+	line-height: 1.5;
+}
+
+.card header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card h3 {
+	font-size: 1.75rem;
+}
+
+.card header button {
+	width: 2.25rem;
+	height: 2.25rem;
+	font-size: 1.5rem;
+	line-height: 1;
+	color: inherit;
+	background: none;
+	border: 2px solid;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.media {
+	position: relative;
+	display: grid;
+	place-items: center;
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	font-weight: 600;
+	color: var(--muted);
+	background: url(/space-frame.png) center / contain no-repeat;
+	border-radius: 10px;
+}
+
+.media img {
+	object-fit: cover;
+}
+
+.badge {
+	justify-self: start;
+	padding: 0.2rem 0.7rem;
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #3d6b22;
+	background: #eef6e7;
+	border-radius: 999px;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	list-style: none;
+}
+
+.tags li {
+	padding: 0 0.65rem;
+	border: 1.5px dashed;
+	border-radius: 999px;
+}
+
+.card a {
+	font-weight: 700;
+}
+
+/* Windows 95 window for Wish You Were Here */
+.win95 {
+	background: #c0c0c0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: inset -2px -2px #808080, inset 2px 2px #fff, 6px 6px 0 rgb(0 0 0 / 0.3);
+}
+
+.win95 > div {
+	padding: 3px 3px 12px;
+}
+
+.win95 > div > :not(header) {
+	margin: 0 9px;
+}
+
+.win95 header {
+	padding: 3px 3px 3px 6px;
+	color: #fff;
+	background: linear-gradient(90deg, #000080, #1084d0);
+}
+
+.win95 h3 {
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.win95 header button {
+	width: 22px;
+	height: 20px;
+	font-size: 0.9rem;
+	color: #000;
+	background: #c0c0c0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: inset -2px -2px #808080, inset 2px 2px #fff;
+}
+
+.win95 .media {
+	color: #fff;
+	background: #008080;
+	border-radius: 0;
+}
+
+.win95 .badge,
+.win95 .tags li {
+	color: #000;
+	background: #fff;
+	border: 1px solid;
+	border-radius: 0;
+}
+
+.win95 a {
+	color: #0000ee;
+	text-decoration-color: currentColor;
+}
+
+.roots {
+	padding: 4rem var(--gutter) 5rem;
+	background: linear-gradient(#f7f0e8, #eee1d1);
+}
+
+.degree {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 1rem 1.75rem;
+	font-weight: 600;
+	text-align: center;
+	background: #fff;
+	border: 2px solid;
+	border-radius: 18px 12px 20px 14px;
+	box-shadow: 4px 4px 0 var(--color-accent);
+}
+
+.degree h3 {
+	font-size: 1.4rem;
+}
+
+.roots svg {
+	display: block;
+	width: 100%;
+	max-width: 900px;
+	height: 90px;
+	margin: 0 auto;
+	fill: none;
+	stroke: var(--root);
+	stroke-width: 3;
+	stroke-linecap: round;
+}
+
+.roots ol {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	max-width: 900px;
+	margin: 0 auto;
+	list-style: none;
+}
+
+.roots li {
+	padding: 1.1rem 1.25rem;
+	line-height: 1.5;
+	background: rgb(255 255 255 / 0.8);
+	border: 1.5px solid var(--root);
+	border-radius: 14px 10px 16px 12px;
+}
+
+.roots li h3 {
+	font-size: 1.2rem;
+}
+
+.roots li strong,
+.roots li small {
+	display: block;
+}
+
+.roots li small {
+	margin-bottom: 0.5rem;
+	color: var(--muted);
+}
+
+.footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.75rem 2rem;
+	padding: 1.25rem var(--gutter) 1.75rem;
+	color: var(--muted);
+	background: #eee1d1;
+}
+
+.plain {
+	display: none;
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: var(--header) var(--gutter) 4rem;
+	line-height: 1.5;
+}
+
+:global(html[data-view="plain"]) .scene {
+	display: none;
+}
+
+:global(html[data-view="plain"]) .plain {
+	display: block;
+}
+
+:global(html[data-view="plain"]) .page,
+:global(html[data-view="plain"]) .footer {
+	background: #fff;
+}
+
+.plain h2 {
+	margin: 2rem 0 0.75rem;
+	font-weight: normal;
+	border-bottom: 2px solid var(--color-accent);
+}
+
+.plain h3 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 0.9rem;
+	font-size: 1.05rem;
+}
+
+.plain h3 span {
+	font-weight: normal;
+	color: var(--muted);
+}
+
+@keyframes float {
+	from { transform: translateX(calc(-25vw - var(--x))); }
+	to { transform: translateX(calc(110vw - var(--x))); }
+}
+
+@keyframes nudge { 50% { translate: 0 5px; } }
+@keyframes bob { 50% { translate: 0 -10px; } }
+@keyframes sway { 0%, 100% { rotate: -3deg; } 50% { rotate: 3deg; } }
+@keyframes wiggle { 0%, 100% { rotate: -12deg; } 50% { rotate: 12deg; } }
+@keyframes grow { from { transform: scale(0.4, 0.1); opacity: 0; } }
+@keyframes draw { from { stroke-dashoffset: 1; } }
+
+/* Plants grow and roots draw in as they scroll into view */
+@supports (animation-timeline: view()) {
+	.sprout {
+		animation: grow linear both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 30%;
+	}
+
+	.roots path {
+		stroke-dasharray: 1;
+		animation: draw linear both;
+		animation-timeline: view();
+		animation-range: entry 30% cover 45%;
+	}
+}
+
+/* Motion off via the footer toggle or the OS: everything rests at its final frame */
+:global(html[data-animations="off"]) .page * {
+	animation: none !important;
+	transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page * {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:global(html:not([data-animations="off"])):has(.page) {
+		scroll-behavior: smooth;
+	}
+}
+
+@media (max-width: 700px) {
+	.page {
+		--gutter: 16px;
+		--header: 6.75rem;
+	}
+
+	.header {
+		padding-block: 1.25rem;
+	}
+
+	.header nav {
+		column-gap: 0.875rem;
+	}
+
+	.lane {
+		height: 76px;
+	}
+
+	.lane svg {
+		scale: 0.8;
+		transform-origin: top left;
+	}
+
+	.hero {
+		grid-template-columns: 1fr;
+	}
+
+	.hero img {
+		grid-row: 1;
+		width: 160px;
+	}
+
+	.clouds li:nth-child(n) {
+		width: min(300px, 90%);
+		margin-top: 0;
+	}
+
+	.clouds li:first-child {
+		width: min(340px, 100%);
+	}
+
+	.roots svg {
+		display: none;
+	}
+
+	/* The taproot runs down the left instead */
+	.roots ol {
+		grid-template-columns: 1fr;
+		padding-left: 1.25rem;
+		border-left: 3px solid var(--root);
+	}
+}
+
+@media print {
+	.header,
+	.scene,
+	.footer {
+		display: none;
+	}
+
+	.plain {
+		display: block;
+		padding: 0;
+	}
+}

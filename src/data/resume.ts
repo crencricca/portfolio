@@ -1,87 +1,47 @@
-// Single source of truth for resume content. The homepage, /resume, and the
-// GitHub profile README (scripts/generate-readme.ts) all read from this file.
-//
-// Keep it self-contained (no imports) and use only erasable TypeScript (no
-// enums or namespaces) so Node can run the README script against it directly.
-//
-// Dates are 'YYYY-MM' strings. Omit `end` on a role that is still current.
-
-export type Link = {
-    label: string,
-    href: string,
-}
+// Resume content for the site and scripts/generate-readme.ts. Node runs that
+// script directly, so keep this file import-free and erasable TypeScript only.
 
 export type Role = {
-    company: string,
+    org: string,
     title: string,
     start: string,
     end?: string,
     location?: string,
     url?: string,
-    highlights?: string[],
-}
-
-export type RootItem = {
-    org: string,
-    title: string,
-    start: string,
-    end: string,
-    location?: string,
     description?: string,
-}
-
-export type Education = {
-    school: string,
-    degree: string,
-    start: number,
-    end: number,
-}
-
-export type SkillGroup = {
-    name: string,
-    skills: string[],
-}
-
-export type ProjectMedia = {
-    // File in public/projects/. .mp4/.webm render as a looping video.
-    file: string,
-    alt: string,
 }
 
 export type Project = {
     slug: string,
     name: string,
     oneLiner: string,
-    // Entries that match a skill name (or end with it, like 'Tailwind CSS' for CSS) stir that
-    // skill's seed when the project is hovered.
     stack: string[],
-    links: Link[],
+    links: { label: string, href: string }[],
     tier: 'featured' | 'regular' | 'sprout',
     growing?: boolean,
     cardStyle?: 'win95',
-    media?: ProjectMedia,
+    media?: { file: string, alt: string }, // file in public/projects/
 }
 
-export type Resume = {
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Dates are 'YYYY-MM'
+export const formatMonth = (date: string) => `${MONTHS[Number(date.slice(5)) - 1]} ${date.slice(0, 4)}`;
+export const formatRange = (start: string, end?: string) => `${formatMonth(start)} – ${end ? formatMonth(end) : 'Present'}`;
+
+export const resume: {
     name: string,
     tagline: string,
     bio: string,
     location: string,
     lastUpdated: string,
-    links: {
-        linkedin: string,
-        github: string,
-        pdf: string,
-        site: string,
-    },
+    links: { linkedin: string, github: string, pdf: string, site: string },
     experience: Role[],
-    education: Education[],
-    roots: RootItem[],
-    skills: SkillGroup[],
+    education: { school: string, degree: string, years: string },
+    roots: Role[],
+    skills: string[],
     projects: Project[],
-}
-
-export const resume: Resume = {
+} = {
     name: 'Catie Rencricca',
     tagline: 'Software engineer with a UX obsession.',
     bio: 'Passionate about intuitive UX, scalable UI systems, and modern web architecture.',
@@ -94,37 +54,11 @@ export const resume: Resume = {
         site: 'https://heycatie.vercel.app',
     },
     experience: [
-        {
-            company: 'TED Conferences',
-            title: 'Software Engineer',
-            start: '2026-06',
-            location: 'New York, NY',
-            url: 'https://www.ted.com',
-        },
-        {
-            company: 'Coinbase',
-            title: 'Software Engineer',
-            start: '2026-02',
-            end: '2026-06',
-            url: 'https://www.coinbase.com',
-        },
-        {
-            company: 'Ridgeline',
-            title: 'UI Product Engineer II',
-            start: '2022-08',
-            end: '2026-02',
-            location: 'Manhattan, NY',
-            url: 'https://www.ridgelineapps.com',
-        },
+        { org: 'TED Conferences', title: 'Software Engineer', start: '2026-06', location: 'New York, NY', url: 'https://www.ted.com' },
+        { org: 'Coinbase', title: 'Software Engineer', start: '2026-02', end: '2026-06', url: 'https://www.coinbase.com' },
+        { org: 'Ridgeline', title: 'UI Product Engineer II', start: '2022-08', end: '2026-02', location: 'Manhattan, NY', url: 'https://www.ridgelineapps.com' },
     ],
-    education: [
-        {
-            school: 'Cornell University',
-            degree: 'BA, Computer Science',
-            start: 2018,
-            end: 2022,
-        },
-    ],
+    education: { school: 'Cornell University', degree: 'BA, Computer Science', years: '2018 – 2022' },
     roots: [
         {
             org: 'Cornell University',
@@ -151,11 +85,7 @@ export const resume: Resume = {
             description: 'Promoted the program online and in person, produced videos in Adobe Premiere, wrote articles, and ran its social media.',
         },
     ],
-    skills: [
-        { name: 'Frontend', skills: ['TypeScript', 'React', 'Next.js', 'CSS'] },
-        { name: 'Mobile', skills: ['React Native'] },
-        { name: 'Game dev', skills: ['Godot'] },
-    ],
+    skills: ['TypeScript', 'React', 'Next.js', 'CSS', 'React Native', 'Godot'],
     projects: [
         {
             slug: 'wish-you-were-here',
@@ -230,6 +160,3 @@ export const resume: Resume = {
         },
     ],
 }
-
-export const currentRole = (data: Resume = resume): Role | undefined =>
-    data.experience.find(role => !role.end);
