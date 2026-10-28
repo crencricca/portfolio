@@ -70,11 +70,6 @@ export default function ResumePage() {
                                 <p className={styles.tagline}>{resume.tagline}</p>
                                 {current && <p className={styles.current}><strong>{current.title}</strong> at <a href={current.url}>{current.org}</a> · {resume.location}</p>}
                                 <p className={styles.bio}>{resume.bio}</p>
-                                <p className={styles.links}>
-                                    <a href={links.linkedin}>LinkedIn</a>
-                                    <a href={links.github}>GitHub</a>
-                                    <a href={links.pdf}>PDF resume</a>
-                                </p>
                             </div>
                             <Image src="/avatar.png" alt="Sketch of Catie" width={220} height={220} priority />
                         </div>
