@@ -106,3 +106,28 @@ export const RootLines = () => (
         </g>
     </svg>
 );
+
+// Decorative bugs in the soil under Education
+export const SoilCritters = () => (
+    <svg viewBox="0 0 900 280" aria-hidden="true">
+        <g filter="url(#sketch)" stroke={INK} strokeWidth="1.2" strokeLinejoin="round">
+            <g transform="translate(48 210)">
+                <ellipse cx="14" cy="16" rx="11" ry="13" fill="#c44536" />
+                <circle cx="14" cy="6" r="5.5" fill="#2a2a2a" />
+                <path d="M14 8V28M8 16h12" fill="none" />
+                <circle cx="9" cy="12" r="1.6" fill="#fff" stroke="none" />
+                <circle cx="18" cy="20" r="1.8" fill="#fff" stroke="none" />
+                <path d="M11 2q-6-8-10-2M17 2q6-8 10-2" fill="none" />
+            </g>
+            <g transform="translate(820 40) rotate(18)">
+                <ellipse cx="16" cy="12" rx="16" ry="10" fill="#5a7a3a" />
+                <ellipse cx="28" cy="11" rx="7" ry="6" fill="#3d5428" />
+                <path d="M4 10q-8-6-10 2M4 14q-8 4-8 10" fill="none" />
+                <circle cx="31" cy="9" r="1.2" fill="#1d1d1f" stroke="none" />
+            </g>
+            <g transform="translate(780 200) rotate(-12)">
+                <path d="M2 10C10 0 22 20 34 8C42 0 50 14 58 8" fill="none" stroke="#c9a07a" strokeWidth="3" />
+            </g>
+        </g>
+    </svg>
+);
