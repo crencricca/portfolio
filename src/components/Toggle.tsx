@@ -3,7 +3,7 @@
 import React from "react";
 
 // Saves a preference and mirrors it onto <html data-{name}> for CSS
-// With activeLabel it's a button whose label names the action, e.g. which view it switches to
+// With activeLabel it's a button labeled with the action it takes
 export default function Toggle({ name, value, label, activeLabel }: { name: string, value: string, label: string, activeLabel?: string }) {
     const [on, setOn] = React.useState(false);
     React.useEffect(() => setOn(document.documentElement.dataset[name] === value), [name, value]);

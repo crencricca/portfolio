@@ -15,24 +15,15 @@ const uses = (project: Project, skill: string) => project.stack.some(tool => too
 // Projects as plants; skills float above as seeds and stir when a project using them is hovered
 export default function Garden() {
     const [hovered, setHovered] = React.useState<Project>();
-    const [tapped, setTapped] = React.useState<string>();
     const [open, setOpen] = React.useState<Project>();
     const dialog = React.useRef<HTMLDialogElement>(null);
-    const hoverIfMouse = (project?: Project) => (e: React.PointerEvent) => {
-        if (e.pointerType === 'mouse') setHovered(project);
-    };
 
     return (
         <section id="projects" className={styles.garden} aria-labelledby="projects-title">
             <h2 id="projects-title">Projects<span>~ skills on the breeze, projects in the garden ~</span></h2>
             <ul className={styles.seeds} aria-label="Skills">
                 {resume.skills.map((skill, i) => (
-                    <li
-                        key={skill}
-                        data-stirred={(hovered && uses(hovered, skill)) || tapped === skill || undefined}
-                        style={{ '--i': i } as React.CSSProperties}
-                        onClick={() => setTapped(current => current === skill ? undefined : skill)}
-                    >
+                    <li key={skill} data-stirred={(hovered && uses(hovered, skill)) || undefined} style={{ '--i': i } as React.CSSProperties}>
                         <Seed />{skill}
                     </li>
                 ))}
@@ -43,9 +34,9 @@ export default function Garden() {
                         <button
                             type="button"
                             aria-haspopup="dialog"
-                            onPointerEnter={hoverIfMouse(project)}
-                            onPointerLeave={hoverIfMouse()}
-                            onFocus={e => { if (e.currentTarget.matches(':focus-visible')) setHovered(project); }}
+                            onMouseEnter={() => setHovered(project)}
+                            onMouseLeave={() => setHovered(undefined)}
+                            onFocus={() => setHovered(project)}
                             onBlur={() => setHovered(undefined)}
                             onClick={() => { setOpen(project); dialog.current?.showModal(); }}
                         >

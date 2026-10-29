@@ -170,13 +170,11 @@
 	align-self: center;
 	padding: 0.45rem 1.4rem;
 	font-weight: 700;
-	letter-spacing: 0.04em;
-	color: var(--ink);
 	background: #fff;
 	border: 2px solid var(--ink);
 	border-radius: 999px;
 	box-shadow: 3px 3px 0 var(--color-accent);
-	transition: color 0.2s, background 0.2s;
+	transition: 0.2s;
 }
 
 .cue:hover,
@@ -229,12 +227,6 @@
 	transition: transform 0.3s;
 }
 
-@media (hover: hover) {
-	.clouds li:hover article {
-		transform: translateY(-8px);
-	}
-}
-
 .clouds svg {
 	position: absolute;
 	width: 100%;
@@ -260,12 +252,11 @@
 	line-height: 1.15;
 }
 
-.clouds a {
+.clouds h3 a {
 	color: var(--color-accent);
 }
 
 .clouds h3 a:hover {
-	color: var(--ink);
 	text-decoration: underline;
 }
 
@@ -303,7 +294,6 @@
 	align-items: center;
 	font-weight: 600;
 	color: var(--muted);
-	cursor: pointer;
 	animation: bob 6s ease-in-out calc(var(--i) * -1.4s) infinite;
 }
 
@@ -366,12 +356,6 @@
 	transform-origin: bottom;
 }
 
-@media (hover: hover) {
-	.bed button:hover svg {
-		animation: sway 1.8s ease-in-out infinite;
-	}
-}
-
 .stake {
 	margin-top: -4px;
 	padding: 0.15rem 0.65rem;
@@ -381,12 +365,6 @@
 	border: 1.5px solid;
 	border-radius: 6px 4px 7px 3px;
 	box-shadow: 2px 2px 0 rgb(0 0 0 / 0.12);
-}
-
-@media (hover: hover) {
-	.bed button:hover .stake {
-		text-decoration: underline;
-	}
 }
 
 .stake small {
@@ -544,21 +522,22 @@
 }
 
 .roots {
-	position: relative;
-	padding: 4rem var(--gutter) 5rem;
-	color: #f3e6d4;
-	background: linear-gradient(#5c4030, #3a2418);
 	--root: #c4a484;
+	position: relative;
+	isolation: isolate;
+	padding: 4rem var(--gutter) 5rem;
+	background: linear-gradient(#5c4030, #3a2418);
 }
 
+.roots h2,
 .roots h2 span {
-	color: #d4c4b0;
+	color: #f3e6d4;
 }
 
 .critters {
 	position: absolute;
 	inset: 0;
-	pointer-events: none;
+	z-index: -1;
 }
 
 .critters svg {
@@ -567,12 +546,10 @@
 }
 
 .degree {
-	position: relative;
 	width: fit-content;
 	margin: 0 auto;
 	padding: 1rem 1.75rem;
 	font-weight: 600;
-	color: var(--ink);
 	text-align: center;
 	background: #fff;
 	border: 2px solid;
@@ -597,7 +574,6 @@
 }
 
 .roots ol {
-	position: relative;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1.5rem;
@@ -609,9 +585,8 @@
 .roots li {
 	padding: 1.1rem 1.25rem;
 	line-height: 1.5;
-	color: var(--ink);
 	background: rgb(255 255 255 / 0.92);
-	border: 1.5px solid #8b6a4f;
+	border: 1.5px solid var(--root);
 	border-radius: 14px 10px 16px 12px;
 }
 
@@ -711,6 +686,21 @@
 	}
 }
 
+/* Touch screens would leave these stuck after a tap */
+@media (hover: hover) {
+	.clouds li:hover article {
+		transform: translateY(-8px);
+	}
+
+	.bed button:hover svg {
+		animation: sway 1.8s ease-in-out infinite;
+	}
+
+	.bed button:hover .stake {
+		text-decoration: underline;
+	}
+}
+
 /* Motion off via the footer toggle or the OS: everything rests at its final frame */
 :global(html[data-animations="off"]) .page * {
 	animation: none !important;
@@ -784,25 +774,15 @@
 		display: none;
 	}
 
-	.roots {
-		padding: 3.25rem var(--gutter) 4rem;
-	}
-
 	.degree {
 		width: 100%;
-		padding: 1.15rem 1.25rem;
 	}
 
 	/* The taproot runs down the left instead */
 	.roots ol {
 		grid-template-columns: 1fr;
-		gap: 1.25rem;
-		padding-left: 1.5rem;
+		padding-left: 1.25rem;
 		border-left: 3px solid var(--root);
-	}
-
-	.roots li {
-		padding: 1.25rem 1.15rem;
 	}
 }
 
