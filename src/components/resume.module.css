@@ -318,11 +318,11 @@
 }
 
 .seeds [data-stirred] {
-	color: var(--color-accent);
+	color: var(--ink);
 }
 
 .seeds [data-stirred] svg {
-	color: var(--color-accent);
+	color: #a8641c;
 	animation: wiggle 0.7s ease-in-out infinite;
 }
 
