@@ -7,15 +7,15 @@ Hi, I'm Catie! I'm a Software Engineer at [TED Conferences](https://www.ted.com)
 ### 🌷 In the garden
 
 <table>
-  <tr><td width="50%" valign="top"><b><a href="https://github.com/crencricca/Wish-You-Were-Here">Wish You Were Here</a></b> <sub>🌱 growing</sub><br>A Windows 95 desktop rebuilt in Godot, with draggable windows, folders, a text editor, and a taskbar, hiding a mystery you uncover by digging through the files.</td><td width="50%" valign="top"><b><a href="https://localhosting.vercel.app">localhost</a></b><br>A social coordination app, built for the web with Next.js and for mobile with React Native.</td></tr>
-  <tr><td width="50%" valign="top"><b><a href="https://github.com/crencricca/witchy-advice">witchy-advice</a></b><br>A potion-brewing mini-game.</td><td width="50%" valign="top"><b><a href="https://github.com/crencricca/coffee-shop-simulator">coffee-shop-simulator</a></b><br>Discover new recipes by combining ingredients.</td></tr>
-  <tr><td width="50%" valign="top"><b><a href="https://github.com/crencricca/flumph">flumph</a></b> <sub>🌱 growing</sub><br>A D&amp;D-inspired, turn-based roguelike where the game acts as your dungeon master. Dice decide the outcomes, branching paths sit under fog of war, and you upgrade a camp between runs.</td></tr>
+  <tr><td width="50%" valign="top"><b><a href="https://github.com/crencricca/Wish-You-Were-Here">Wish You Were Here</a></b> <sub>🌱 growing</sub><br>A Windows 95 desktop rebuilt in Godot, with draggable windows, folders, a text editor, and a taskbar, hiding a mystery you uncover by digging through the files.</td><td width="50%" valign="top"><a href="https://localhosting.vercel.app"><img src="https://heycatie.vercel.app/projects/localhost.png" alt="Three phone screens from the Local Host mobile app: a list of upcoming events, an event detail page, and the new event form" width="100%"></a><br><b><a href="https://localhosting.vercel.app">Local Host</a></b><br>A social coordination app, built for the web with Next.js and for mobile with React Native.</td></tr>
+  <tr><td width="50%" valign="top"><a href="https://github.com/crencricca/witchy-advice"><img src="https://heycatie.vercel.app/projects/witchy-advice.png" alt="Witchy Advice title screen asking for your name above a moonlit village" width="100%"></a><br><b><a href="https://github.com/crencricca/witchy-advice">Witchy Advice</a></b><br>A potion-brewing mini-game.</td><td width="50%" valign="top"><a href="https://github.com/crencricca/coffee-shop-simulator"><img src="https://heycatie.vercel.app/projects/coffee-shop-simulator.png" alt="Pixel art shelf of coffee, matcha, honey, milk, and whipped cream above a freshly made golden matcha cappuccino" width="100%"></a><br><b><a href="https://github.com/crencricca/coffee-shop-simulator">Coffee Shop Simulator</a></b><br>Discover new recipes by combining ingredients.</td></tr>
+  <tr><td width="50%" valign="top"><b><a href="https://github.com/crencricca/flumph">Flumph</a></b> <sub>🌱 growing</sub><br>A D&amp;D-inspired, turn-based roguelike where the game acts as your dungeon master. Dice decide the outcomes, branching paths sit under fog of war, and you upgrade a camp between runs.</td></tr>
 </table>
 
 Also sprouting:
-- [aol-chat](https://github.com/crencricca/aol-chat) · A nostalgic chat interface for anyone else who misses AIM.
-- [native-weather](https://github.com/crencricca/native-weather) · Today's and yesterday's weather, side by side.
-- [calendar](https://github.com/crencricca/calendar) · Plan events with friends.
+- [AOL Chat](https://github.com/crencricca/aol-chat) · A nostalgic chat interface for anyone else who misses AIM.
+- [Native Weather](https://github.com/crencricca/native-weather) · Today's and yesterday's weather, side by side.
+- [Calendar](https://github.com/crencricca/calendar) · Plan events with friends.
 
 ### [Explore the interactive resume →](https://heycatie.vercel.app)
 
