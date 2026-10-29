@@ -14,9 +14,12 @@ const bodyFont = Dosis({ subsets: ['latin'], variable: '--font-body' });
 
 export const metadata: Metadata = {
     description: `${resume.tagline} ${resume.bio}`,
-    openGraph: { title: resume.name, description: resume.tagline, type: 'profile', images: '/opengraph-image.png' },
+    openGraph: { title: resume.name, siteName: resume.name, description: resume.tagline, type: 'profile', images: '/opengraph-image.png' },
     twitter: { card: 'summary_large_image' },
 };
+
+// Tells Google the site name to show in search results instead of "Vercel"
+const WEBSITE_SCHEMA = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: resume.name, url: `${resume.links.site}/` });
 
 // Applies saved toggles (see Toggle) before first paint
 const RESTORE_PREFERENCES = `try{for(const n of['animations','view']){const v=localStorage.getItem('catie:'+n);if(v)document.documentElement.dataset[n]=v}}catch(e){}`;
@@ -46,6 +49,7 @@ export default function ResumePage() {
 
     return (
         <div className={`${styles.page} ${titleFont.variable} ${bodyFont.variable}`}>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBSITE_SCHEMA }} />
             <script dangerouslySetInnerHTML={{ __html: RESTORE_PREFERENCES }} />
             <SketchDefs />
             <header className={styles.header}>
