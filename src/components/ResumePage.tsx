@@ -4,7 +4,7 @@ import { Concert_One, Dosis } from "next/font/google";
 import React from "react";
 import styles from "@/components/resume.module.css";
 import { formatMonth, formatRange, resume } from "@/data/resume";
-import { CloudShape, RootLines, SketchDefs } from "@/components/art";
+import { CloudShape, RootLines, SketchDefs, SoilCritters } from "@/components/art";
 import Garden from "@/components/Garden";
 import PlainResume from "@/components/PlainResume";
 import Toggle from "@/components/Toggle";
@@ -14,9 +14,12 @@ const bodyFont = Dosis({ subsets: ['latin'], variable: '--font-body' });
 
 export const metadata: Metadata = {
     description: `${resume.tagline} ${resume.bio}`,
-    openGraph: { title: resume.name, description: resume.tagline, type: 'profile', images: '/opengraph-image.png' },
+    openGraph: { title: resume.name, siteName: resume.name, description: resume.tagline, type: 'profile', images: '/opengraph-image.png' },
     twitter: { card: 'summary_large_image' },
 };
+
+// Tells Google the site name to show in search results instead of "Vercel"
+const WEBSITE_SCHEMA = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: resume.name, url: `${resume.links.site}/` });
 
 // Applies saved toggles (see Toggle) before first paint
 const RESTORE_PREFERENCES = `try{for(const n of['animations','view']){const v=localStorage.getItem('catie:'+n);if(v)document.documentElement.dataset[n]=v}}catch(e){}`;
@@ -46,6 +49,7 @@ export default function ResumePage() {
 
     return (
         <div className={`${styles.page} ${titleFont.variable} ${bodyFont.variable}`}>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBSITE_SCHEMA }} />
             <script dangerouslySetInnerHTML={{ __html: RESTORE_PREFERENCES }} />
             <SketchDefs />
             <header className={styles.header}>
@@ -57,7 +61,7 @@ export default function ResumePage() {
                     <a href={links.linkedin}>LinkedIn</a>
                     <a href={links.pdf}>PDF</a>
                     <a href={links.github}>Github</a>
-                    <Toggle name="view" value="plain" label="Plain resume" button />
+                    <Toggle name="view" value="plain" label="Switch to plain resume" activeLabel="Switch to garden view" />
                 </nav>
             </header>
             <main>
@@ -68,7 +72,7 @@ export default function ResumePage() {
                             <div>
                                 <h1 id="name">{resume.name}</h1>
                                 <p className={styles.tagline}>{resume.tagline}</p>
-                                {current && <p className={styles.current}><strong>{current.title}</strong> at <a href={current.url}>{current.org}</a> · {resume.location}</p>}
+                                {current && <p className={styles.current}><strong>{current.title}</strong> at <a href={current.url}>{current.org}</a><span className={styles.sep} aria-hidden="true"> · </span><span className={styles.place}>{resume.location}</span></p>}
                                 <p className={styles.bio}>{resume.bio}</p>
                             </div>
                             <Image src="/avatar.png" alt="Sketch of Catie" width={220} height={220} priority />
@@ -101,6 +105,7 @@ export default function ResumePage() {
                     <Garden />
 
                     <section id="education" className={styles.roots} aria-labelledby="education-title">
+                        <div className={styles.critters} aria-hidden="true"><SoilCritters /></div>
                         <h2 id="education-title">Education<span>~ where I grew from ~</span></h2>
                         <div className={styles.degree}>
                             <h3>{education.school}</h3>
